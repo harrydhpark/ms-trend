@@ -1,0 +1,15 @@
+# Confidential & Large Data Files
+Databook/
+*.xlsb
+*.xlsx
+
+# Python & System
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# Firebase local cache
+.firebase/
+firebase-debug.log
+firepit-log.txt

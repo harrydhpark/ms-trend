@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "tv-ms-trend-dashboard",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
