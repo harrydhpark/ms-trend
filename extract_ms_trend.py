@@ -5,7 +5,7 @@ import math
 
 # Paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
-databook_path = os.path.join(current_dir, "Databook", "경쟁지표_Data Book_26.5월 누적 (260713).xlsb")
+databook_path = os.path.join(current_dir, "Databook", "경쟁지표_Data Book_26.6월 누적 (260812)_수정.xlsb")
 output_json_path = os.path.join(current_dir, "ms_trend_data.json")
 
 # Target sheets (Europe region only)

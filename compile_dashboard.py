@@ -1,5 +1,6 @@
 import os
 import json
+import shutil
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_data_path = os.path.join(current_dir, "ms_trend_data.json")
@@ -23,6 +24,7 @@ def build_html():
     html_template = """<!DOCTYPE html>
 <html class="light" lang="ko">
 <head>
+    <script src="auth-guard.js"></script>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Executive Portal | LGE Europe TV MS Trend Dashboard</title>
@@ -1376,7 +1378,16 @@ def build_html():
     with open(output_html_path, "w", encoding="utf-8") as f:
         f.write(compiled_html)
         
-    print(f"Dashboard HTML compiled successfully! Generated file: {output_html_path}")
+    root_html_path = os.path.join(current_dir, "index.html")
+    shutil.copy2(output_html_path, root_html_path)
+
+    for script in ["auth-guard.js", "portal-topbar.js"]:
+        src = os.path.join(current_dir, script)
+        dst = os.path.join(current_dir, "public", script)
+        if os.path.exists(src):
+            shutil.copy2(src, dst)
+
+    print(f"Dashboard HTML compiled successfully! Generated files: {output_html_path} and {root_html_path}")
 
 if __name__ == "__main__":
     build_html()
