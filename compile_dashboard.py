@@ -4,6 +4,8 @@ import shutil
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 json_data_path = os.path.join(current_dir, "ms_trend_data.json")
+insights_data_path = os.path.join(current_dir, "ms_trend_insights.json")
+diff_data_path = os.path.join(current_dir, "ms_trend_diff.json")
 output_html_path = os.path.join(current_dir, "public", "index.html")
 
 def build_html():
@@ -15,11 +17,25 @@ def build_html():
     with open(json_data_path, "r", encoding="utf-8") as f:
         json_data = json.load(f)
         
+    insights_data = {}
+    if os.path.exists(insights_data_path):
+        print(f"Loading AI insights from: {insights_data_path}")
+        with open(insights_data_path, "r", encoding="utf-8") as f:
+            insights_data = json.load(f)
+            
+    diff_data = {}
+    if os.path.exists(diff_data_path):
+        print(f"Loading Diff dataset from: {diff_data_path}")
+        with open(diff_data_path, "r", encoding="utf-8") as f:
+            diff_data = json.load(f)
+        
     # Ensure the public directory exists
     os.makedirs(os.path.dirname(output_html_path), exist_ok=True)
         
     # Serialize to insert into HTML
     serialized_data = json.dumps(json_data, ensure_ascii=False, indent=2)
+    serialized_insights = json.dumps(insights_data, ensure_ascii=False, indent=2)
+    serialized_diff = json.dumps(diff_data, ensure_ascii=False, indent=2)
     
     html_template = """<!DOCTYPE html>
 <html class="light" lang="ko">
@@ -148,7 +164,7 @@ def build_html():
                 <div class="h-8 w-px bg-slate-200"></div>
                 <div class="text-right">
                     <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Data Source</p>
-                    <p class="text-sm font-bold text-secondary">M/S Databook (26.5월)</p>
+                    <p class="text-sm font-bold text-secondary" id="data-source-badge">M/S Databook (26.7월)</p>
                 </div>
             </div>
         </header>
@@ -170,15 +186,15 @@ def build_html():
             </div>
 
             <!-- Table Selection Menu (Tabs) -->
-            <div class="flex border-b border-slate-200 gap-2 flex-shrink-0">
+            <div id="country-tabs-bar" class="flex border-b border-slate-200 gap-2 flex-shrink-0">
                 <button id="tab-btn-market" class="px-6 py-2.5 text-sm font-bold border-b-2 border-secondary text-primary transition-all" onclick="switchTableTab('market')">시장 지표 (Market Size & Share)</button>
                 <button id="tab-btn-comp-lg" class="px-6 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-primary transition-all" onclick="switchTableTab('comp-lg')">경쟁 현황 M/S (LG)</button>
                 <button id="tab-btn-comp-other" class="px-6 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-primary transition-all" onclick="switchTableTab('comp-other')">경쟁 현황 M/S (경쟁사)</button>
                 <button id="tab-btn-asp" class="px-6 py-2.5 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-primary transition-all" onclick="switchTableTab('asp')">ASP & API 트렌드 (ASP & API Trend)</button>
             </div>
 
-            <!-- Data Tables Section -->
-            <div class="flex flex-col gap-8">
+            <!-- Data Tables Section (Country Mode) -->
+            <div id="country-tables-container" class="flex flex-col gap-8">
                 <!-- Table 1: Market -->
                 <div id="section-market" class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
                     <div class="flex justify-between items-center mb-4">
@@ -243,12 +259,19 @@ def build_html():
                     </div>
                 </div>
             </div>
+
+            <!-- Section 5: July vs June Diff Summary (Executive Overview Mode) -->
+            <div id="section-diff" class="flex flex-col gap-8">
+                <!-- Dynamic content injected by renderDiffSection() -->
+            </div>
         </div>
     </main>
 
     <!-- Embed Data & Business Logic -->
     <script>
         const dashboardData = /*DASHBOARD_DATA_PLACEHOLDER*/;
+        const dashboardInsights = /*DASHBOARD_INSIGHTS_PLACEHOLDER*/;
+        const dashboardDiff = /*DASHBOARD_DIFF_PLACEHOLDER*/;
         
         const regionMeta = {
             'EU': { en: 'Europe (유럽)', kr: '유럽 전체 (Europe)', sheet: '유럽' },
@@ -292,6 +315,7 @@ def build_html():
             { code: 'LGEUK', isAccordion: false }
         ];
 
+        let currentView = 'diff';
         let currentRegion = 'EU';
         let currentYear = 2026;
         let currentTableTab = 'market';
@@ -569,6 +593,36 @@ def build_html():
             const nav = document.getElementById('sidebar-nav');
             nav.innerHTML = '';
             
+            // 1. EXECUTIVE OVERVIEW Section
+            const execHeader = document.createElement('div');
+            execHeader.className = "px-8 py-2 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1";
+            execHeader.innerText = "EXECUTIVE OVERVIEW";
+            nav.appendChild(execHeader);
+
+            const isDiffActive = (currentView === 'diff');
+            const diffBtn = document.createElement('button');
+            diffBtn.id = 'sidebar-btn-diff';
+            diffBtn.className = "w-full flex items-center px-8 py-3 text-left transition-all text-xs font-medium " + 
+                (isDiffActive 
+                    ? "active bg-white/15 text-white font-bold border-r-4 border-r-teal-400 shadow-sm" 
+                    : "text-white/80 hover:text-white hover:bg-white/5");
+            
+            diffBtn.innerHTML = `
+                <span class="flex items-center gap-2.5">
+                    <span class="w-2 h-2 rounded-full ${isDiffActive ? 'bg-teal-300 animate-pulse' : 'bg-teal-400/60'}"></span>
+                    <span class="flex-1 font-headline">7월 vs 6월 핵심 변동 요약</span>
+                    <span class="px-1.5 py-0.5 text-[9px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded tracking-wider uppercase">DIFF</span>
+                </span>
+            `;
+            diffBtn.onclick = () => selectDiffView();
+            nav.appendChild(diffBtn);
+
+            // Divider between Executive Overview and Region List
+            const divider = document.createElement('div');
+            divider.className = "my-3 mx-6 border-t border-white/10";
+            nav.appendChild(divider);
+
+            // 2. REGION: EUROPE Section
             const groupHeader = document.createElement('div');
             groupHeader.className = "px-8 py-2 text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1";
             groupHeader.innerText = "REGION: EUROPE";
@@ -592,10 +646,12 @@ def build_html():
                     rowDiv.className = "w-full flex items-center justify-between hover:bg-white/5 transition-all relative group";
                     
                     const mainBtn = document.createElement('button');
-                    mainBtn.className = "flex-1 flex items-center px-8 py-2.5 text-left text-white/70 hover:text-white transition-all text-xs font-medium sidebar-btn-" + item.code;
+                    mainBtn.className = "flex-1 flex items-center px-8 py-2.5 text-left transition-all text-xs font-medium sidebar-btn-" + item.code;
                     
-                    if (currentRegion === item.code) {
+                    if (currentView === 'country' && currentRegion === item.code) {
                         mainBtn.className += " active bg-white/10 text-white font-bold border-r-4 border-r-white";
+                    } else {
+                        mainBtn.className += " text-white/70 hover:text-white";
                     }
                     
                     const shortCode = item.code.replace('LGE', '');
@@ -627,10 +683,12 @@ def build_html():
                         if (!subMeta) return;
                         
                         const subBtn = document.createElement('button');
-                        subBtn.className = "w-full flex items-center pl-16 pr-8 py-2 text-left text-white/60 hover:text-white hover:bg-white/5 transition-all text-[11px] font-normal sidebar-btn-" + subCode;
+                        subBtn.className = "w-full flex items-center pl-16 pr-8 py-2 text-left hover:bg-white/5 transition-all text-[11px] font-normal sidebar-btn-" + subCode;
                         
-                        if (currentRegion === subCode) {
+                        if (currentView === 'country' && currentRegion === subCode) {
                             subBtn.className += " active bg-white/10 text-white font-bold border-r-4 border-r-white";
+                        } else {
+                            subBtn.className += " text-white/60 hover:text-white";
                         }
                         
                         subBtn.innerHTML = `
@@ -648,10 +706,12 @@ def build_html():
                     
                 } else {
                     const btn = document.createElement('button');
-                    btn.className = "w-full flex items-center px-8 py-2.5 text-left text-white/70 hover:text-white hover:bg-white/5 transition-all text-xs font-medium sidebar-btn-" + item.code;
+                    btn.className = "w-full flex items-center px-8 py-2.5 text-left hover:bg-white/5 transition-all text-xs font-medium sidebar-btn-" + item.code;
                     
-                    if (currentRegion === item.code) {
+                    if (currentView === 'country' && currentRegion === item.code) {
                         btn.className += " active bg-white/10 text-white font-bold border-r-4 border-r-white";
+                    } else {
+                        btn.className += " text-white/70 hover:text-white";
                     }
                     
                     const shortCode = item.code.replace('LGE', '');
@@ -677,7 +737,14 @@ def build_html():
             });
         }
 
+        function selectDiffView() {
+            currentView = 'diff';
+            renderSidebar();
+            updateView();
+        }
+
         function selectRegion(code) {
+            currentView = 'country';
             currentRegion = code;
             
             sidebarMenu.forEach(item => {
@@ -740,29 +807,73 @@ def build_html():
 
         // Update the complete dashboard view
         function updateView() {
-            const meta = regionMeta[currentRegion];
-            document.getElementById('page-indicator').innerText = `${meta.kr} TV 경쟁지표 대시보드`;
-            document.getElementById('banner-title').innerText = `${meta.kr} TV 경쟁지표 & M/S 모니터링`;
-            
-            const sheetName = meta.sheet;
-            const rows = (dashboardData.regions[sheetName] && dashboardData.regions[sheetName].data) ? dashboardData.regions[sheetName].data : [];
-            
-            // Pre-calculate M/S YoY changes using parental M/S rows
-            preCalculateAllMsYoY(rows);
-            
-            // 1. Render Summary Cards
-            renderSummaryCards(rows);
-            
-            // 2. Filter Rows for Tables
-            const marketRows = rows.filter(r => r.index >= 7 && r.index <= 19);
-            const compLgRows = rows.filter(r => r.index >= 27 && r.index <= 58);
-            const compOtherRows = rows.filter(r => r.index >= 59 && r.index <= 131);
-            const aspRows = rows.filter(r => r.index >= 132 && r.index <= 151);
-            
-            renderTable('table-market', marketRows);
-            renderTable('table-comp-lg', compLgRows);
-            renderTable('table-comp-other', compOtherRows);
-            renderTable('table-asp', aspRows);
+            const activeMonth = (dashboardInsights && dashboardInsights.metadata && dashboardInsights.metadata.active_month) ? dashboardInsights.metadata.active_month : 7;
+            const badgeEl = document.getElementById('data-source-badge');
+            if (badgeEl) {
+                badgeEl.innerText = `M/S Databook (26.${activeMonth}월)`;
+            }
+
+            const tabsBar = document.getElementById('country-tabs-bar');
+            const countryTables = document.getElementById('country-tables-container');
+            const diffSection = document.getElementById('section-diff');
+
+            if (currentView === 'diff') {
+                // Executive Overview Mode (7월 vs 6월 Diff)
+                document.getElementById('page-indicator').innerText = '7월 vs 6월 핵심 변동 비교 분석 요약';
+                document.getElementById('banner-title').innerText = '2026년 7월 vs 6월 누적 핵심 변동 총괄 리포트';
+                document.getElementById('banner-desc').innerText = '최신 7월 누적 M/S Databook 업데이트에 따른 유럽 시장 규모, LG 및 주요 경쟁사(삼성, 하이센스 등)의 M/S 변동, 삼성비 격차 변화, 판가(ASP/API) 추이 및 주요 14개 권역별 핵심 특이사항을 총괄 비교합니다.';
+                
+                // Hide country tabs and tables
+                if (tabsBar) tabsBar.classList.add('hidden');
+                if (countryTables) countryTables.classList.add('hidden');
+                
+                // Show diff section
+                if (diffSection) {
+                    diffSection.classList.remove('hidden');
+                    renderDiffSection();
+                }
+
+                // Render Summary KPI Cards based on Europe HQ
+                const euRows = (dashboardData.regions['유럽'] && dashboardData.regions['유럽'].data) ? dashboardData.regions['유럽'].data : [];
+                preCalculateAllMsYoY(euRows);
+                renderSummaryCards(euRows);
+
+            } else {
+                // Country Drill-Down Mode
+                const meta = regionMeta[currentRegion];
+                document.getElementById('page-indicator').innerText = `${meta.kr} TV 경쟁지표 대시보드`;
+                document.getElementById('banner-title').innerText = `${meta.kr} TV 경쟁지표 & M/S 모니터링`;
+                document.getElementById('banner-desc').innerText = '본 포털은 유럽 주요 지사의 TV 시장 규모, 경쟁사 브랜드별 M/S(삼성, 소니, 하이센스, 필립스) 및 주요 판가(ASP/API) 트렌드를 모니터링합니다. 좌측 지사 목록에서 아코디언 메뉴를 통해 특정 법인을 선택하면 엑셀 원천 데이터가 대시보드 테이블에 동적으로 렌더링됩니다.';
+
+                // Show country tabs and tables
+                if (tabsBar) tabsBar.classList.remove('hidden');
+                if (countryTables) countryTables.classList.remove('hidden');
+                
+                // Hide diff section
+                if (diffSection) diffSection.classList.add('hidden');
+
+                const sheetName = meta.sheet;
+                const rows = (dashboardData.regions[sheetName] && dashboardData.regions[sheetName].data) ? dashboardData.regions[sheetName].data : [];
+                
+                // Pre-calculate M/S YoY changes using parental M/S rows
+                preCalculateAllMsYoY(rows);
+                
+                // Render Summary Cards
+                renderSummaryCards(rows);
+                
+                // Filter Rows for Tables
+                const marketRows = rows.filter(r => r.index >= 7 && r.index <= 19);
+                const compLgRows = rows.filter(r => r.index >= 27 && r.index <= 58);
+                const compOtherRows = rows.filter(r => r.index >= 59 && r.index <= 131);
+                const aspRows = rows.filter(r => r.index >= 132 && r.index <= 151);
+                
+                renderTable('table-market', marketRows);
+                renderTable('table-comp-lg', compLgRows);
+                renderTable('table-comp-other', compOtherRows);
+                renderTable('table-asp', aspRows);
+
+                switchTableTab(currentTableTab);
+            }
         }
 
         // Summary YTD Card Renderer
@@ -1364,6 +1475,229 @@ def build_html():
             table.innerHTML = html;
         }
 
+        // Render 7월 vs 6월 핵심 변동 비교 분석 요약 (Section 5)
+        function renderDiffSection() {
+            const container = document.getElementById('section-diff');
+            if (!container) return;
+            if (!dashboardDiff || !dashboardDiff.europe_summary) {
+                container.innerHTML = '<div class="p-8 text-center text-slate-400 bg-white rounded border border-slate-200">비교 데이터셋을 불러올 수 없습니다.</div>';
+                return;
+            }
+
+            const europe_summary = dashboardDiff.europe_summary || [];
+            const regional_table = dashboardDiff.regional_table || [];
+            const country_highlights = dashboardDiff.country_highlights || [];
+
+            let html = '';
+
+            // ------------------------------------------
+            // Part 1. 유럽 전체 핵심 지표 종합 대조표
+            // ------------------------------------------
+            html += `
+            <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="h-5 w-1 bg-primary"></span>
+                        <h4 class="text-lg font-headline font-bold text-primary">유럽 전체 핵심 지표 종합 대조표 (15대 핵심 지표)</h4>
+                        <span class="px-2.5 py-0.5 text-xs font-bold bg-primary/10 text-primary rounded border border-primary/20">Europe HQ</span>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs text-slate-500">
+                        <span>기준: 2026년 7월 누적 vs 2026년 6월 누적 및 7월 단월</span>
+                        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>개선/호조</span>
+                        <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>축소/위협</span>
+                    </div>
+                </div>
+                <div class="table-container border border-slate-100 rounded overflow-x-auto">
+                    <table class="min-w-full border-collapse text-left text-xs">
+                        <thead>
+                            <tr class="bg-primary text-white border-b border-white/20">
+                                <th class="py-3 px-4 sticky left-0 bg-primary z-20 font-semibold">핵심 지표</th>
+                                <th class="py-3 px-2 text-center font-semibold">단위</th>
+                                <th class="py-3 px-3 text-right font-semibold">6월 누계 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/10">7월 누계 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold">7월 단월 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/15">누계 변동폭 (7M vs 6M)</th>
+                                <th class="py-3 px-4 font-semibold">비고 및 핵심 진단</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+            `;
+
+            europe_summary.forEach((item, idx) => {
+                const bgRow = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50';
+                let deltaBadge = '';
+                if (item.is_positive === true) {
+                    deltaBadge = `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200">${item.delta}</span>`;
+                } else if (item.is_positive === false) {
+                    deltaBadge = `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-rose-50 text-rose-700 border border-rose-200">${item.delta}</span>`;
+                } else {
+                    deltaBadge = `<span class="px-2 py-0.5 rounded font-medium font-mono text-[11px] bg-slate-100 text-slate-700 border border-slate-200">${item.delta}</span>`;
+                }
+
+                html += `
+                    <tr class="${bgRow} hover:bg-slate-100/60 transition-colors">
+                        <td class="py-2.5 px-4 font-medium text-slate-800 sticky left-0 bg-white border-r border-slate-100 z-10">${item.name}</td>
+                        <td class="py-2.5 px-2 text-center text-slate-400 font-mono text-[11px]">${item.unit}</td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${item.val_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${item.val_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-slate-700">${item.val_jul}</td>
+                        <td class="py-2.5 px-3 text-right font-mono">${deltaBadge}</td>
+                        <td class="py-2.5 px-4 text-slate-600 text-xs">${item.note}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            `;
+
+            // ------------------------------------------
+            // Part 2. 주요 거점 법인별 M/S 및 격차 비교표
+            // ------------------------------------------
+            html += `
+            <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6">
+                <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="h-5 w-1 bg-secondary"></span>
+                        <h4 class="text-lg font-headline font-bold text-primary">주요 거점 법인별 M/S 및 격차 비교표 (14개 권역)</h4>
+                    </div>
+                    <span class="text-xs text-slate-400 font-medium">단위: 비율(%), 단순격차(%p) | 정렬: 5대 거점 및 주요 권역 순</span>
+                </div>
+                <div class="table-container border border-slate-100 rounded overflow-x-auto">
+                    <table class="min-w-full border-collapse text-left text-xs">
+                        <thead>
+                            <tr class="bg-primary text-white border-b border-white/20">
+                                <th class="py-3 px-4 sticky left-0 bg-primary z-20 font-semibold">거점 법인</th>
+                                <th class="py-3 px-3 text-right font-semibold">LG M/S (6M)</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/10">LG M/S (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">7월 단월 M/S</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/15">누계 변동 (%p)</th>
+                                <th class="py-3 px-3 text-right font-semibold">삼성비 격차 (6M)</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-secondary/30">삼성비 격차 (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">OLED M/S (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">하이센스 M/S (7M)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+            `;
+
+            regional_table.forEach((sub, idx) => {
+                const bgRow = idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50';
+                const lgDiffBadge = sub.is_lg_up 
+                    ? `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200">${sub.lg_diff}</span>`
+                    : `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-rose-50 text-rose-700 border border-rose-200">${sub.lg_diff}</span>`;
+
+                const spDiffBadge = sub.is_sp_narrowed 
+                    ? `<span class="font-bold text-emerald-600">${sub.sp_7m}</span> <span class="text-[10px] text-emerald-600 font-mono">(${sub.sp_diff})</span>`
+                    : `<span class="font-bold text-slate-800">${sub.sp_7m}</span> <span class="text-[10px] text-rose-500 font-mono">(${sub.sp_diff})</span>`;
+
+                html += `
+                    <tr class="${bgRow} hover:bg-slate-100/60 transition-colors">
+                        <td class="py-2.5 px-4 font-bold text-slate-800 sticky left-0 bg-white border-r border-slate-100 z-10 flex items-center gap-2">
+                            <span class="text-[9px] font-mono font-bold bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded border border-slate-200 uppercase">${sub.short_code}</span>
+                            <span>${sub.name}</span>
+                        </td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${sub.lg_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${sub.lg_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-secondary">${sub.lg_jul}</td>
+                        <td class="py-2.5 px-3 text-right font-mono">${lgDiffBadge}</td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-500">${sub.sp_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono bg-secondary/5">${spDiffBadge}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-teal-700">${sub.oled_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-medium text-slate-600">${sub.his_7m}</td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            `;
+
+            // ------------------------------------------
+            // Part 3. 권역별 특이사항 카드 그리드
+            // ------------------------------------------
+            html += `
+            <div class="bg-white border border-slate-200 rounded-lg shadow-sm p-6 flex flex-col gap-6">
+                <div class="flex flex-wrap justify-between items-center border-b border-slate-100 pb-4 gap-2">
+                    <div class="flex items-center gap-3">
+                        <span class="h-5 w-1 bg-teal-accent"></span>
+                        <h4 class="text-lg font-headline font-bold text-primary">권역별 특이사항 및 전략 브리핑 (Country Highlights)</h4>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs">
+                        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">호조/성장 (Positive)</span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-teal-50 text-teal-700 border border-teal-200">격차 축소 (Opportunity)</span>
+                        <span class="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">경쟁 심화 (Watch/Risk)</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            `;
+
+            country_highlights.forEach(card => {
+                let borderClass = 'border-slate-200 hover:border-slate-300';
+                let badgeClass = 'bg-slate-100 text-slate-700 border-slate-200';
+                let iconColor = 'text-slate-400';
+
+                if (card.status_type === 'good') {
+                    borderClass = 'border-emerald-200/80 hover:border-emerald-400 hover:shadow-emerald-50';
+                    badgeClass = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    iconColor = 'text-emerald-500';
+                } else if (card.status_type === 'opportunity') {
+                    borderClass = 'border-teal-200/80 hover:border-teal-400 hover:shadow-teal-50';
+                    badgeClass = 'bg-teal-50 text-teal-700 border-teal-200';
+                    iconColor = 'text-teal-500';
+                } else if (card.status_type === 'risk') {
+                    borderClass = 'border-rose-200/80 hover:border-rose-400 hover:shadow-rose-50';
+                    badgeClass = 'bg-rose-50 text-rose-700 border-rose-200';
+                    iconColor = 'text-rose-500';
+                }
+
+                html += `
+                    <div class="bg-white border ${borderClass} rounded-lg p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-3 gap-2">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-[10px] font-mono font-bold bg-primary text-white px-2 py-0.5 rounded uppercase tracking-wider">${card.short_code}</span>
+                                    <h5 class="font-bold text-slate-900 text-sm tracking-tight">${card.name}</h5>
+                                </div>
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold border ${badgeClass}">${card.status_label}</span>
+                            </div>
+
+                            <!-- Pills -->
+                            <div class="flex flex-wrap gap-1.5 mb-4">
+                                ${card.pills.map(p => `
+                                    <span class="px-2 py-0.5 bg-slate-50 text-slate-700 border border-slate-200/80 rounded text-[10px] font-mono font-medium">${p}</span>
+                                `).join('')}
+                            </div>
+
+                            <!-- Bullets -->
+                            <ul class="space-y-2 text-xs text-slate-600 leading-relaxed">
+                                ${card.bullets.map(b => `
+                                    <li class="flex items-start gap-2">
+                                        <span class="${iconColor} text-[10px] mt-0.5 flex-shrink-0">●</span>
+                                        <span class="text-slate-700">${b}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                </div>
+            </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
         // Initialize Dashboard
         renderSidebar();
         updateView();
@@ -1372,8 +1706,10 @@ def build_html():
 </html>
 """
     
-    # Replace placeholder with serialized json data
+    # Replace placeholders with serialized json data
     compiled_html = html_template.replace("/*DASHBOARD_DATA_PLACEHOLDER*/", serialized_data)
+    compiled_html = compiled_html.replace("/*DASHBOARD_INSIGHTS_PLACEHOLDER*/", serialized_insights)
+    compiled_html = compiled_html.replace("/*DASHBOARD_DIFF_PLACEHOLDER*/", serialized_diff)
     
     with open(output_html_path, "w", encoding="utf-8") as f:
         f.write(compiled_html)

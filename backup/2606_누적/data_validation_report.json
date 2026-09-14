@@ -1,0 +1,18 @@
+{
+  "metadata": {
+    "validated_at": "2026-09-12T20:13:30.709588",
+    "source_file": "경쟁지표_Data Book_26.6월 누적 (260812)_수정.xlsb",
+    "total_expected_regions": 21,
+    "parsed_regions": 21
+  },
+  "status": "PASSED",
+  "health_score": 100,
+  "critical_errors": [],
+  "warnings": [],
+  "latest_active_month_2026": 6,
+  "summary": {
+    "out_of_bound_ms_count": 0,
+    "negative_volume_count": 0,
+    "active_month_2026": "6월 누계"
+  }
+}
