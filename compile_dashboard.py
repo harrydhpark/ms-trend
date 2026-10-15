@@ -260,7 +260,7 @@ def build_html():
                 </div>
             </div>
 
-            <!-- Section 5: July vs June Diff Summary (Executive Overview Mode) -->
+            <!-- Section 5: August vs July Diff Summary (Executive Overview Mode) -->
             <div id="section-diff" class="flex flex-col gap-8">
                 <!-- Dynamic content injected by renderDiffSection() -->
             </div>
@@ -610,7 +610,7 @@ def build_html():
             diffBtn.innerHTML = `
                 <span class="flex items-center gap-2.5">
                     <span class="w-2 h-2 rounded-full ${isDiffActive ? 'bg-teal-300 animate-pulse' : 'bg-teal-400/60'}"></span>
-                    <span class="flex-1 font-headline">7월 vs 6월 핵심 변동 요약</span>
+                    <span class="flex-1 font-headline">8월 vs 7월 핵심 변동 요약</span>
                     <span class="px-1.5 py-0.5 text-[9px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30 rounded tracking-wider uppercase">DIFF</span>
                 </span>
             `;
@@ -818,10 +818,10 @@ def build_html():
             const diffSection = document.getElementById('section-diff');
 
             if (currentView === 'diff') {
-                // Executive Overview Mode (7월 vs 6월 Diff)
-                document.getElementById('page-indicator').innerText = '7월 vs 6월 핵심 변동 비교 분석 요약';
-                document.getElementById('banner-title').innerText = '2026년 7월 vs 6월 누적 핵심 변동 총괄 리포트';
-                document.getElementById('banner-desc').innerText = '최신 7월 누적 M/S Databook 업데이트에 따른 유럽 시장 규모, LG 및 주요 경쟁사(삼성, 하이센스 등)의 M/S 변동, 삼성비 격차 변화, 판가(ASP/API) 추이 및 주요 14개 권역별 핵심 특이사항을 총괄 비교합니다.';
+                // Executive Overview Mode (8월 vs 7월 Diff)
+                document.getElementById('page-indicator').innerText = '8월 vs 7월 핵심 변동 비교 분석 요약';
+                document.getElementById('banner-title').innerText = '2026년 8월 vs 7월 누적 핵심 변동 총괄 리포트';
+                document.getElementById('banner-desc').innerText = '최신 8월 누적 M/S Databook 업데이트에 따른 유럽 시장 규모, LG 및 주요 경쟁사(삼성, 하이센스 등)의 M/S 변동, 삼성비 격차 변화, 판가(ASP/API) 추이 및 주요 14개 권역별 핵심 특이사항을 총괄 비교합니다.';
                 
                 // Hide country tabs and tables
                 if (tabsBar) tabsBar.classList.add('hidden');
@@ -1502,7 +1502,7 @@ def build_html():
                         <span class="px-2.5 py-0.5 text-xs font-bold bg-primary/10 text-primary rounded border border-primary/20">Europe HQ</span>
                     </div>
                     <div class="flex items-center gap-4 text-xs text-slate-500">
-                        <span>기준: 2026년 7월 누적 vs 2026년 6월 누적 및 7월 단월</span>
+                        <span>기준: 2026년 8월 누적 vs 2026년 7월 누적 및 8월 단월</span>
                         <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>개선/호조</span>
                         <span class="inline-flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500"></span>축소/위협</span>
                     </div>
@@ -1513,10 +1513,10 @@ def build_html():
                             <tr class="bg-primary text-white border-b border-white/20">
                                 <th class="py-3 px-4 sticky left-0 bg-primary z-20 font-semibold">핵심 지표</th>
                                 <th class="py-3 px-2 text-center font-semibold">단위</th>
-                                <th class="py-3 px-3 text-right font-semibold">6월 누계 실적</th>
-                                <th class="py-3 px-3 text-right font-semibold bg-white/10">7월 누계 실적</th>
-                                <th class="py-3 px-3 text-right font-semibold">7월 단월 실적</th>
-                                <th class="py-3 px-3 text-right font-semibold bg-white/15">누계 변동폭 (7M vs 6M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">7월 누계 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/10">8월 누계 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold">8월 단월 실적</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/15">누계 변동폭 (8M vs 7M)</th>
                                 <th class="py-3 px-4 font-semibold">비고 및 핵심 진단</th>
                             </tr>
                         </thead>
@@ -1538,9 +1538,9 @@ def build_html():
                     <tr class="${bgRow} hover:bg-slate-100/60 transition-colors">
                         <td class="py-2.5 px-4 font-medium text-slate-800 sticky left-0 bg-white border-r border-slate-100 z-10">${item.name}</td>
                         <td class="py-2.5 px-2 text-center text-slate-400 font-mono text-[11px]">${item.unit}</td>
-                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${item.val_6m}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${item.val_7m}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-slate-700">${item.val_jul}</td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${item.val_7m || item.val_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${item.val_8m || item.val_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-slate-700">${item.val_aug || item.val_jul}</td>
                         <td class="py-2.5 px-3 text-right font-mono">${deltaBadge}</td>
                         <td class="py-2.5 px-4 text-slate-600 text-xs">${item.note}</td>
                     </tr>
@@ -1571,14 +1571,14 @@ def build_html():
                         <thead>
                             <tr class="bg-primary text-white border-b border-white/20">
                                 <th class="py-3 px-4 sticky left-0 bg-primary z-20 font-semibold">거점 법인</th>
-                                <th class="py-3 px-3 text-right font-semibold">LG M/S (6M)</th>
-                                <th class="py-3 px-3 text-right font-semibold bg-white/10">LG M/S (7M)</th>
-                                <th class="py-3 px-3 text-right font-semibold">7월 단월 M/S</th>
+                                <th class="py-3 px-3 text-right font-semibold">LG M/S (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-white/10">LG M/S (8M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">8월 단월 M/S</th>
                                 <th class="py-3 px-3 text-right font-semibold bg-white/15">누계 변동 (%p)</th>
-                                <th class="py-3 px-3 text-right font-semibold">삼성비 격차 (6M)</th>
-                                <th class="py-3 px-3 text-right font-semibold bg-secondary/30">삼성비 격차 (7M)</th>
-                                <th class="py-3 px-3 text-right font-semibold">OLED M/S (7M)</th>
-                                <th class="py-3 px-3 text-right font-semibold">하이센스 M/S (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">삼성비 격차 (7M)</th>
+                                <th class="py-3 px-3 text-right font-semibold bg-secondary/30">삼성비 격차 (8M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">OLED M/S (8M)</th>
+                                <th class="py-3 px-3 text-right font-semibold">하이센스 M/S (8M)</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100">
@@ -1590,9 +1590,10 @@ def build_html():
                     ? `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-emerald-50 text-emerald-700 border border-emerald-200">${sub.lg_diff}</span>`
                     : `<span class="px-2 py-0.5 rounded font-bold font-mono text-[11px] bg-rose-50 text-rose-700 border border-rose-200">${sub.lg_diff}</span>`;
 
+                const curSp = sub.sp_8m || sub.sp_7m;
                 const spDiffBadge = sub.is_sp_narrowed 
-                    ? `<span class="font-bold text-emerald-600">${sub.sp_7m}</span> <span class="text-[10px] text-emerald-600 font-mono">(${sub.sp_diff})</span>`
-                    : `<span class="font-bold text-slate-800">${sub.sp_7m}</span> <span class="text-[10px] text-rose-500 font-mono">(${sub.sp_diff})</span>`;
+                    ? `<span class="font-bold text-emerald-600">${curSp}</span> <span class="text-[10px] text-emerald-600 font-mono">(${sub.sp_diff})</span>`
+                    : `<span class="font-bold text-slate-800">${curSp}</span> <span class="text-[10px] text-rose-500 font-mono">(${sub.sp_diff})</span>`;
 
                 html += `
                     <tr class="${bgRow} hover:bg-slate-100/60 transition-colors">
@@ -1600,14 +1601,14 @@ def build_html():
                             <span class="text-[9px] font-mono font-bold bg-slate-100 text-slate-700 px-1.5 py-0.5 rounded border border-slate-200 uppercase">${sub.short_code}</span>
                             <span>${sub.name}</span>
                         </td>
-                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${sub.lg_6m}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${sub.lg_7m}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-bold text-secondary">${sub.lg_jul}</td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-600">${sub.lg_7m || sub.lg_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-primary bg-primary/5">${sub.lg_8m || sub.lg_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-bold text-secondary">${sub.lg_aug || sub.lg_jul}</td>
                         <td class="py-2.5 px-3 text-right font-mono">${lgDiffBadge}</td>
-                        <td class="py-2.5 px-3 text-right font-mono text-slate-500">${sub.sp_6m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono text-slate-500">${sub.sp_7m || sub.sp_6m}</td>
                         <td class="py-2.5 px-3 text-right font-mono bg-secondary/5">${spDiffBadge}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-teal-700">${sub.oled_7m}</td>
-                        <td class="py-2.5 px-3 text-right font-mono font-medium text-slate-600">${sub.his_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-semibold text-teal-700">${sub.oled_8m || sub.oled_7m}</td>
+                        <td class="py-2.5 px-3 text-right font-mono font-medium text-slate-600">${sub.his_8m || sub.his_7m}</td>
                     </tr>
                 `;
             });

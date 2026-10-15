@@ -63,6 +63,9 @@
       portalUrl = 'https://tv-sales-portal-2026.web.app';
     }
 
+    const isEn = (new URLSearchParams(window.location.search).get('lang') === 'en') || (localStorage.getItem('portal_lang') === 'en');
+    const backText = isEn ? 'Back to Portal' : '포탈로 돌아가기';
+
     topBar.innerHTML = `
       <style>
         #portal-unified-topbar .portal-back-btn {
@@ -114,7 +117,7 @@
       <div style="display: flex; align-items: center; gap: 16px;">
         <a href="${portalUrl}" class="portal-back-btn" id="btn-portal-back-action">
           <i class="ri-arrow-left-line" style="font-size: 16px;"></i>
-          <span>포탈로 돌아가기</span>
+          <span id="portal-back-text">${backText}</span>
         </a>
       </div>
 
@@ -129,6 +132,15 @@
       if (window.history.length > 1 && document.referrer.includes('Portal')) {
         e.preventDefault();
         window.history.back();
+      }
+    });
+
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'PORTAL_LANG_CHANGE') {
+        const textEl = document.getElementById('portal-back-text');
+        if (textEl) {
+          textEl.textContent = e.data.lang === 'en' ? 'Back to Portal' : '포탈로 돌아가기';
+        }
       }
     });
 

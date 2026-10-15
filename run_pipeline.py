@@ -56,7 +56,7 @@ def run_step_diff():
     print_header("[Optional Step] Version Diff & Comparison Engine")
     success = generate_ms_trend_diff.generate_diff_report()
     if success:
-        print("\n[Diff Summary] Generated ms_trend_diff_2607_vs_2606.md successfully.")
+        print("\n[Diff Summary] Generated ms_trend_diff_2608_vs_2607.md & ms_trend_diff.json successfully.")
     return success
 
 def main():

@@ -1,0 +1,751 @@
+{
+  "metadata": {
+    "generated_at": "2026-09-14T14:06:45.181706",
+    "comparison_period": "2026년 7월 누적 vs 2026년 6월 누적",
+    "active_month": 7
+  },
+  "europe_summary": [
+    {
+      "name": "시장 규모 (금액)",
+      "unit": "억불",
+      "val_6m": "78.4억불",
+      "val_7m": "92.5억불",
+      "val_jul": "14.1억불",
+      "delta": "+14.1억불",
+      "is_positive": true,
+      "note": "7월 단월 14.1억불 정상 누적 반영"
+    },
+    {
+      "name": "시장 규모 (수량)",
+      "unit": "백만대",
+      "val_6m": "13.7백만대",
+      "val_7m": "16.3백만대",
+      "val_jul": "2.6백만대",
+      "delta": "+2.6백만대",
+      "is_positive": true,
+      "note": "7월 단월 2.6백만대 누적"
+    },
+    {
+      "name": "시장 평균 ASP",
+      "unit": "$",
+      "val_6m": "600$",
+      "val_7m": "595$",
+      "val_jul": "567$",
+      "delta": "-5$",
+      "is_positive": null,
+      "note": "여름 비수기 전반적 판가 소폭 조정"
+    },
+    {
+      "name": "LG 금액 M/S",
+      "unit": "%",
+      "val_6m": "22.1%",
+      "val_7m": "22.1%",
+      "val_jul": "22.4%",
+      "delta": "+0.1%p",
+      "is_positive": true,
+      "note": "7월 단월 22.4%로 반등하며 누적 M/S 견조 수성"
+    },
+    {
+      "name": "LG 수량 M/S",
+      "unit": "%",
+      "val_6m": "16.2%",
+      "val_7m": "16.2%",
+      "val_jul": "16.3%",
+      "delta": "+0.0%p",
+      "is_positive": true,
+      "note": "7월 단월 16.3%로 수량 점유율 안정세"
+    },
+    {
+      "name": "SAMSUNG 금액 M/S",
+      "unit": "%",
+      "val_6m": "34.9%",
+      "val_7m": "34.6%",
+      "val_jul": "33.2%",
+      "delta": "-0.2%p",
+      "is_positive": false,
+      "note": "7월 단월 33.2%로 소폭 둔화 (-0.2%p)"
+    },
+    {
+      "name": "SAMSUNG 수량 M/S",
+      "unit": "%",
+      "val_6m": "26.6%",
+      "val_7m": "26.4%",
+      "val_jul": "25.4%",
+      "delta": "-0.2%p",
+      "is_positive": false,
+      "note": "7월 단월 25.4%로 수량 점유율 소폭 하락"
+    },
+    {
+      "name": "삼성비 격차 (Samsung Spread)",
+      "unit": "%p",
+      "val_6m": "-12.8%p",
+      "val_7m": "-12.5%p",
+      "val_jul": "-10.8%p",
+      "delta": "+0.3%p",
+      "is_positive": true,
+      "note": "삼성 대비 격차 축소 (+0.3%p 개선, LG 우세 흐름)"
+    },
+    {
+      "name": "LG OLED 금액 M/S",
+      "unit": "%",
+      "val_6m": "45.0%",
+      "val_7m": "45.4%",
+      "val_jul": "47.6%",
+      "delta": "+0.4%p",
+      "is_positive": true,
+      "note": "7월 단월 47.6% 급상승, 프리미엄 주도권 강화"
+    },
+    {
+      "name": "SAMSUNG OLED 금액 M/S",
+      "unit": "%",
+      "val_6m": "33.3%",
+      "val_7m": "33.4%",
+      "val_jul": "33.5%",
+      "delta": "+0.0%p",
+      "is_positive": null,
+      "note": "33.4%로 보합 유지"
+    },
+    {
+      "name": "OLED 삼성비 격차",
+      "unit": "%p",
+      "val_6m": "+11.7%p",
+      "val_7m": "+12.0%p",
+      "val_jul": "+14.1%p",
+      "delta": "+0.3%p",
+      "is_positive": true,
+      "note": "삼성 OLED 대비 격차 +12.0%p로 확대 (+0.3%p 우위 증대)"
+    },
+    {
+      "name": "LG OLED 누적 판매량",
+      "unit": "천 대",
+      "val_6m": "649.8천 대",
+      "val_7m": "770.7천 대",
+      "val_jul": "120.9천 대",
+      "delta": "+120.9천 대",
+      "is_positive": true,
+      "note": "7월 단월 120.9천 대 순증으로 770.7천 대 달성"
+    },
+    {
+      "name": "LG 평균 ASP",
+      "unit": "$",
+      "val_6m": "825$",
+      "val_7m": "820$",
+      "val_jul": "785$",
+      "delta": "-6$",
+      "is_positive": null,
+      "note": "시장 평균($595) 대비 +$225 높은 고가 프리미엄 유지"
+    },
+    {
+      "name": "SAMSUNG 평균 ASP",
+      "unit": "$",
+      "val_6m": "771$",
+      "val_7m": "765$",
+      "val_jul": "728$",
+      "delta": "-6$",
+      "is_positive": null,
+      "note": "LG와 판가차 $55 유지"
+    },
+    {
+      "name": "HISENSE 금액 M/S",
+      "unit": "%",
+      "val_6m": "8.5%",
+      "val_7m": "8.7%",
+      "val_jul": "9.6%",
+      "delta": "+0.2%p",
+      "is_positive": false,
+      "note": "7월 단월 9.6%로 중저가 볼륨 공세 지속"
+    }
+  ],
+  "regional_table": [
+    {
+      "sheet": "DG",
+      "code": "LGEDG",
+      "short_code": "DG",
+      "name": "독일 법인 (LGEDG)",
+      "lg_6m": "20.3%",
+      "lg_7m": "20.4%",
+      "lg_jul": "20.4%",
+      "lg_diff": "+0.0%p",
+      "is_lg_up": true,
+      "sp_6m": "-14.1%p",
+      "sp_7m": "-13.9%p",
+      "sp_jul": "-12.2%p",
+      "sp_diff": "+0.3%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "39.0%",
+      "oled_7m": "39.4%",
+      "oled_jul": "42.2%",
+      "oled_diff": "+0.5%p",
+      "his_6m": "11.1%",
+      "his_7m": "11.0%",
+      "his_diff": "-0.1%p"
+    },
+    {
+      "sheet": "UK (2)",
+      "code": "LGEUK",
+      "short_code": "UK",
+      "name": "영국 법인 (LGEUK)",
+      "lg_6m": "22.2%",
+      "lg_7m": "22.1%",
+      "lg_jul": "21.5%",
+      "lg_diff": "-0.1%p",
+      "is_lg_up": false,
+      "sp_6m": "-9.8%p",
+      "sp_7m": "-9.7%p",
+      "sp_jul": "-9.5%p",
+      "sp_diff": "+0.0%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "50.1%",
+      "oled_7m": "50.3%",
+      "oled_jul": "51.4%",
+      "oled_diff": "+0.2%p",
+      "his_6m": "13.0%",
+      "his_7m": "13.3%",
+      "his_diff": "+0.3%p"
+    },
+    {
+      "sheet": "FS",
+      "code": "LGEFS",
+      "short_code": "FS",
+      "name": "프랑스 법인 (LGEFS)",
+      "lg_6m": "15.8%",
+      "lg_7m": "15.8%",
+      "lg_jul": "15.6%",
+      "lg_diff": "-0.0%p",
+      "is_lg_up": false,
+      "sp_6m": "-17.2%p",
+      "sp_7m": "-17.0%p",
+      "sp_jul": "-15.8%p",
+      "sp_diff": "+0.2%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "42.1%",
+      "oled_7m": "41.7%",
+      "oled_jul": "39.2%",
+      "oled_diff": "-0.4%p",
+      "his_6m": "15.0%",
+      "his_7m": "14.9%",
+      "his_diff": "-0.1%p"
+    },
+    {
+      "sheet": "IS",
+      "code": "LGEIS",
+      "short_code": "IS",
+      "name": "이탈리아 법인 (LGEIS)",
+      "lg_6m": "21.1%",
+      "lg_7m": "21.2%",
+      "lg_jul": "21.5%",
+      "lg_diff": "+0.1%p",
+      "is_lg_up": true,
+      "sp_6m": "-10.3%p",
+      "sp_7m": "-10.2%p",
+      "sp_jul": "-9.2%p",
+      "sp_diff": "+0.2%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "47.2%",
+      "oled_7m": "47.7%",
+      "oled_jul": "50.3%",
+      "oled_diff": "+0.4%p",
+      "his_6m": "14.2%",
+      "his_7m": "14.4%",
+      "his_diff": "+0.2%p"
+    },
+    {
+      "sheet": "ES",
+      "code": "LGEES",
+      "short_code": "ES",
+      "name": "스페인 법인 (LGEES)",
+      "lg_6m": "28.8%",
+      "lg_7m": "29.0%",
+      "lg_jul": "30.8%",
+      "lg_diff": "+0.3%p",
+      "is_lg_up": true,
+      "sp_6m": "-5.4%p",
+      "sp_7m": "-4.5%p",
+      "sp_jul": "+0.8%p",
+      "sp_diff": "+0.9%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "50.7%",
+      "oled_7m": "51.7%",
+      "oled_jul": "57.7%",
+      "oled_diff": "+1.0%p",
+      "his_6m": "10.6%",
+      "his_7m": "10.7%",
+      "his_diff": "+0.1%p"
+    },
+    {
+      "sheet": "BN",
+      "code": "LGEBN",
+      "short_code": "BN",
+      "name": "베네룩스 지점 (LGEBN)",
+      "lg_6m": "21.8%",
+      "lg_7m": "22.2%",
+      "lg_jul": "24.1%",
+      "lg_diff": "+0.3%p",
+      "is_lg_up": true,
+      "sp_6m": "-20.9%p",
+      "sp_7m": "-20.5%p",
+      "sp_jul": "-17.8%p",
+      "sp_diff": "+0.5%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "41.7%",
+      "oled_7m": "42.2%",
+      "oled_jul": "45.6%",
+      "oled_diff": "+0.6%p",
+      "his_6m": "12.1%",
+      "his_7m": "12.0%",
+      "his_diff": "-0.1%p"
+    },
+    {
+      "sheet": "SW (2)",
+      "code": "LGESW",
+      "short_code": "SW",
+      "name": "스웨덴 법인 (LGESW)",
+      "lg_6m": "24.0%",
+      "lg_7m": "24.2%",
+      "lg_jul": "25.2%",
+      "lg_diff": "+0.2%p",
+      "is_lg_up": true,
+      "sp_6m": "-16.9%p",
+      "sp_7m": "-16.6%p",
+      "sp_jul": "-14.8%p",
+      "sp_diff": "+0.3%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "65.8%",
+      "oled_7m": "66.1%",
+      "oled_jul": "67.5%",
+      "oled_diff": "+0.2%p",
+      "his_6m": "15.9%",
+      "his_7m": "15.9%",
+      "his_diff": "+0.0%p"
+    },
+    {
+      "sheet": "CZ",
+      "code": "LGECK",
+      "short_code": "CK",
+      "name": "체코 법인 (LGECK)",
+      "lg_6m": "24.5%",
+      "lg_7m": "24.6%",
+      "lg_jul": "25.3%",
+      "lg_diff": "+0.1%p",
+      "is_lg_up": true,
+      "sp_6m": "-8.0%p",
+      "sp_7m": "-7.7%p",
+      "sp_jul": "-5.6%p",
+      "sp_diff": "+0.3%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "52.7%",
+      "oled_7m": "53.4%",
+      "oled_jul": "57.8%",
+      "oled_diff": "+0.7%p",
+      "his_6m": "15.9%",
+      "his_7m": "15.9%",
+      "his_diff": "+0.1%p"
+    },
+    {
+      "sheet": "MK(Croatia제외)",
+      "code": "LGEMK",
+      "short_code": "MK",
+      "name": "헝가리 법인 (LGEMK)",
+      "lg_6m": "27.0%",
+      "lg_7m": "26.9%",
+      "lg_jul": "25.8%",
+      "lg_diff": "-0.2%p",
+      "is_lg_up": false,
+      "sp_6m": "-0.6%p",
+      "sp_7m": "-0.7%p",
+      "sp_jul": "-1.7%p",
+      "sp_diff": "-0.2%p",
+      "is_sp_narrowed": false,
+      "oled_6m": "55.8%",
+      "oled_7m": "55.4%",
+      "oled_jul": "52.9%",
+      "oled_diff": "-0.4%p",
+      "his_6m": "14.0%",
+      "his_7m": "14.0%",
+      "his_diff": "+0.0%p"
+    },
+    {
+      "sheet": "PT",
+      "code": "LGEPT",
+      "short_code": "PT",
+      "name": "포르투갈 지점 (LGEPT)",
+      "lg_6m": "30.9%",
+      "lg_7m": "30.5%",
+      "lg_jul": "27.7%",
+      "lg_diff": "-0.5%p",
+      "is_lg_up": false,
+      "sp_6m": "+8.4%p",
+      "sp_7m": "+7.9%p",
+      "sp_jul": "+5.3%p",
+      "sp_diff": "-0.4%p",
+      "is_sp_narrowed": false,
+      "oled_6m": "59.4%",
+      "oled_7m": "59.0%",
+      "oled_jul": "56.6%",
+      "oled_diff": "-0.4%p",
+      "his_6m": "16.0%",
+      "his_7m": "16.2%",
+      "his_diff": "+0.2%p"
+    },
+    {
+      "sheet": "RO",
+      "code": "LGERO",
+      "short_code": "RO",
+      "name": "루마니아 지점 (LGERO)",
+      "lg_6m": "18.2%",
+      "lg_7m": "18.4%",
+      "lg_jul": "19.2%",
+      "lg_diff": "+0.1%p",
+      "is_lg_up": true,
+      "sp_6m": "-20.8%p",
+      "sp_7m": "-20.4%p",
+      "sp_jul": "-18.0%p",
+      "sp_diff": "+0.4%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "44.2%",
+      "oled_7m": "43.6%",
+      "oled_jul": "40.5%",
+      "oled_diff": "-0.5%p",
+      "his_6m": "9.9%",
+      "his_7m": "9.6%",
+      "his_diff": "-0.3%p"
+    },
+    {
+      "sheet": "AG",
+      "code": "LGEAG",
+      "short_code": "AG",
+      "name": "오스트리아 지점 (LGEAG)",
+      "lg_6m": "25.8%",
+      "lg_7m": "25.6%",
+      "lg_jul": "24.5%",
+      "lg_diff": "-0.2%p",
+      "is_lg_up": false,
+      "sp_6m": "-15.3%p",
+      "sp_7m": "-15.4%p",
+      "sp_jul": "-15.5%p",
+      "sp_diff": "-0.0%p",
+      "is_sp_narrowed": false,
+      "oled_6m": "51.8%",
+      "oled_7m": "52.2%",
+      "oled_jul": "54.3%",
+      "oled_diff": "+0.4%p",
+      "his_6m": "7.4%",
+      "his_7m": "7.5%",
+      "his_diff": "+0.1%p"
+    },
+    {
+      "sheet": "HS",
+      "code": "LGEHS",
+      "short_code": "HS",
+      "name": "그리스 법인 (LGEHS)",
+      "lg_6m": "23.9%",
+      "lg_7m": "24.1%",
+      "lg_jul": "24.5%",
+      "lg_diff": "+0.1%p",
+      "is_lg_up": true,
+      "sp_6m": "-14.3%p",
+      "sp_7m": "-13.7%p",
+      "sp_jul": "-10.5%p",
+      "sp_diff": "+0.5%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "49.3%",
+      "oled_7m": "49.3%",
+      "oled_jul": "49.1%",
+      "oled_diff": "-0.0%p",
+      "his_6m": "10.8%",
+      "his_7m": "10.7%",
+      "his_diff": "-0.1%p"
+    },
+    {
+      "sheet": "Switzerland",
+      "code": "Swiss",
+      "short_code": "CH",
+      "name": "스위스 지점 (Swiss)",
+      "lg_6m": "22.1%",
+      "lg_7m": "22.4%",
+      "lg_jul": "24.3%",
+      "lg_diff": "+0.3%p",
+      "is_lg_up": true,
+      "sp_6m": "-25.3%p",
+      "sp_7m": "-24.4%p",
+      "sp_jul": "-19.5%p",
+      "sp_diff": "+0.8%p",
+      "is_sp_narrowed": true,
+      "oled_6m": "36.0%",
+      "oled_7m": "36.7%",
+      "oled_jul": "40.8%",
+      "oled_diff": "+0.7%p",
+      "his_6m": "8.1%",
+      "his_7m": "8.4%",
+      "his_diff": "+0.3%p"
+    }
+  ],
+  "country_highlights": [
+    {
+      "code": "LGEDG",
+      "short_code": "DG",
+      "name": "독일 법인 (LGEDG)",
+      "status_type": "neutral",
+      "status_label": "견조한 20%선 방어 수성",
+      "pills": [
+        "7월 M/S: 20.4%",
+        "누계 M/S: 20.4% (+0.0%p)",
+        "삼성 격차: -13.9%p",
+        "OLED M/S: 39.4%",
+        "하이센스 M/S: 11.0%"
+      ],
+      "bullets": [
+        "유럽 최대 시장인 독일에서 7월 단월 20.4%를 기록, 누적 20.4%로 흔들림 없이 20%선 기준선을 방어했습니다.",
+        "삼성과의 격차는 6월 누적 -14.1%p에서 -13.9%p로 소폭 축소되었습니다.",
+        "OLED 점유율 39.4%로 40%선 회복을 위해 가을 성수기 시즌 연계 프리미엄 번들 프로모션 집중이 요구됩니다."
+      ]
+    },
+    {
+      "code": "LGEUK",
+      "short_code": "UK",
+      "name": "영국 법인 (LGEUK)",
+      "status_type": "risk",
+      "status_label": "경쟁 심화 요주의 (Watch)",
+      "pills": [
+        "7월 M/S: 21.5%",
+        "누계 M/S: 22.1% (-0.1%p)",
+        "삼성 격차: -9.7%p",
+        "OLED M/S: 50.3%",
+        "하이센스 M/S: 13.3%"
+      ],
+      "bullets": [
+        "7월 단월 21.5%로 전월 누적(22.2%) 대비 소폭 하락하며 누적 점유율이 22.1%로 조정되었습니다.",
+        "OLED는 50.3%로 절반을 방어했으나, Currys 등 주요 유통에서 하이센스(13.3%) 및 삼성 네오 QLED의 가격 인하 공세가 거셉니다.",
+        "하반기 성수기 진입 전 주요 유통사 전용 패키지 프로모션 수립이 시급합니다."
+      ]
+    },
+    {
+      "code": "LGEFS",
+      "short_code": "FS",
+      "name": "프랑스 법인 (LGEFS)",
+      "status_type": "risk",
+      "status_label": "방어 과제 & M/S 반등 필요",
+      "pills": [
+        "7월 M/S: 15.6%",
+        "누계 M/S: 15.8% (-0.0%p)",
+        "삼성 격차: -17.0%p",
+        "OLED M/S: 41.7%",
+        "하이센스 M/S: 14.9%"
+      ],
+      "bullets": [
+        "서유럽 5대 거점 중 가장 낮은 15.8%의 M/S를 기록하고 있으며, 삼성과의 격차도 -17.0%p로 벌어져 있습니다.",
+        "하이센스가 14.9%까지 추격하여 LG를 단 0.9%p 차이로 위협하고 있어 중저가 볼륨존의 즉각적인 방어 전략이 요구됩니다.",
+        "OLED 41.7%는 유지하고 있으나, 유통 커버리지 확대 및 대형 올림픽/스포츠 특수 연계 판촉이 절실합니다."
+      ]
+    },
+    {
+      "code": "LGEIS",
+      "short_code": "IS",
+      "name": "이탈리아 법인 (LGEIS)",
+      "status_type": "opportunity",
+      "status_label": "점유율 반등 & OLED 선전",
+      "pills": [
+        "7월 M/S: 21.5%",
+        "누계 M/S: 21.2% (+0.1%p)",
+        "삼성 격차: -10.2%p",
+        "OLED M/S: 47.7%",
+        "하이센스 M/S: 14.4%"
+      ],
+      "bullets": [
+        "7월 단월 21.5%로 뚜렷한 회복세를 보이며 누적 점유율 21.2%로 소폭 반등(+0.1%p)했습니다.",
+        "OLED 시장에서 47.7%를 점유하여 삼성 OLED를 확실하게 제어하고 있으며, 초대형 믹스 개선에 집중하고 있습니다.",
+        "삼성비 격차는 -10.2%p 수준을 유지하며 하반기 10% 이내 진입을 가시권에 두고 있습니다."
+      ]
+    },
+    {
+      "code": "LGEES",
+      "short_code": "ES",
+      "name": "스페인 법인 (LGEES)",
+      "status_type": "good",
+      "status_label": "성장 호조 & 격차 대폭 축소",
+      "pills": [
+        "7월 M/S: 30.8%",
+        "누계 M/S: 29.0% (+0.3%p)",
+        "삼성 격차: -4.5%p",
+        "OLED M/S: 51.7%",
+        "하이센스 M/S: 10.7%"
+      ],
+      "bullets": [
+        "7월 단월 점유율이 30.8%로 급등하며 5대 거점 법인 중 유일하게 30% 선을 돌파했습니다.",
+        "삼성과의 M/S 격차를 6월 누적 -5.4%p에서 -4.5%p(7월 단월 -0.7%p)로 대폭 축소하며 맹추격 중입니다.",
+        "OLED M/S 51.7%로 과반 이상을 장악하여 스페인 프리미엄 시장 지배력을 확고히 유지하고 있습니다."
+      ]
+    },
+    {
+      "code": "LGEBN",
+      "short_code": "BN",
+      "name": "베네룩스 지점 (LGEBN)",
+      "status_type": "opportunity",
+      "status_label": "7월 단월 턴어라운드 반등",
+      "pills": [
+        "7월 M/S: 24.1%",
+        "누계 M/S: 22.2% (+0.3%p)",
+        "삼성 격차: -20.5%p",
+        "OLED M/S: 42.2%",
+        "하이센스 M/S: 12.0%"
+      ],
+      "bullets": [
+        "7월 단월 M/S 24.1%로 전월 누적(21.8%) 대비 급반등하며 누적 점유율을 22.2%로 +0.3%p 견인했습니다.",
+        "벨기에/네덜란드 주요 유통 프로모션 활성화로 모멘텀을 확보했으며, 삼성비 격차도 -20.5%p로 축소 전환되었습니다.",
+        "OLED M/S 42.2% 및 하이센스(12.0%) 공세에 맞서 메인스트림 판가 대응력을 확보 중입니다."
+      ]
+    },
+    {
+      "code": "LGESW",
+      "short_code": "SW",
+      "name": "스웨덴 법인 (LGESW)",
+      "status_type": "good",
+      "status_label": "지속 성장 & OLED 초강세",
+      "pills": [
+        "7월 M/S: 25.2%",
+        "누계 M/S: 24.2% (+0.2%p)",
+        "삼성 격차: -16.6%p",
+        "OLED M/S: 66.1%",
+        "하이센스 M/S: 15.9%"
+      ],
+      "bullets": [
+        "7월 단월 25.2%를 달성하여 6월(24.0%) 대비 누적 점유율이 24.2%로 지속적인 우상향 곡선을 그렸습니다.",
+        "OLED 세그먼트 M/S가 66.1%에 달해 북유럽 내 독보적인 프리미엄 1위 브랜드 위상을 입증했습니다.",
+        "전년 동기 대비 +3.8%p 성장하여 전 유럽 권역 중 점유율 성장률 Top 1을 기록했습니다."
+      ]
+    },
+    {
+      "code": "LGECK",
+      "short_code": "CK",
+      "name": "체코 법인 (LGECK)",
+      "status_type": "opportunity",
+      "status_label": "동유럽 성장 견인 & OLED 53%",
+      "pills": [
+        "7월 M/S: 25.3%",
+        "누계 M/S: 24.6% (+0.1%p)",
+        "삼성 격차: -7.7%p",
+        "OLED M/S: 53.4%",
+        "하이센스 M/S: 15.9%"
+      ],
+      "bullets": [
+        "7월 단월 25.3%로 호조를 보이며 누적 점유율 24.6%를 달성, 안정적인 시장 2위 지위를 확고히 했습니다.",
+        "OLED 점유율 53.4%로 과반 이상을 지배하고 있으며, 삼성비 격차도 -7.7%p로 7%대에 진입했습니다.",
+        "하이센스(15.9%)의 볼륨 공세에 맞서 슬로바키아/체코 유통 파트너십을 결속하고 있습니다."
+      ]
+    },
+    {
+      "code": "LGEMK",
+      "short_code": "MK",
+      "name": "헝가리 법인 (LGEMK)",
+      "status_type": "risk",
+      "status_label": "삼성과 초접전 & 하이센스 공세",
+      "pills": [
+        "7월 M/S: 25.8%",
+        "누계 M/S: 26.9% (-0.2%p)",
+        "삼성 격차: -0.7%p",
+        "OLED M/S: 55.4%",
+        "하이센스 M/S: 14.0%"
+      ],
+      "bullets": [
+        "삼성 M/S 27.6% 대비 LG M/S 26.9%로 단 0.7%p 차이의 초접전 양상을 이어가고 있습니다.",
+        "7월 단월 실적이 25.8%로 다소 주춤함에 따라 동유럽 핵심 거점 1위 탈환을 위한 메인스트림 QNED 판가 지원이 요구됩니다.",
+        "하이센스가 14.0%로 빠르게 추격하고 있어 중가형 라인업의 가격 경쟁력 방어가 시급합니다."
+      ]
+    },
+    {
+      "code": "LGEPT",
+      "short_code": "PT",
+      "name": "포르투갈 지점 (LGEPT)",
+      "status_type": "good",
+      "status_label": "유럽 유일 삼성 추월 1위",
+      "pills": [
+        "7월 M/S: 27.7%",
+        "누계 M/S: 30.5% (-0.5%p)",
+        "삼성 격차: +7.9%p",
+        "OLED M/S: 59.0%",
+        "하이센스 M/S: 16.2%"
+      ],
+      "bullets": [
+        "2026년 7월 누적 M/S 30.5%로 삼성전자(22.6%)를 +7.9%p 격차로 누르고 유럽 내 유일한 1위 지위를 확고히 수성하고 있습니다.",
+        "OLED M/S 59.0%로 프리미엄 시장을 완전히 장악하고 있으나, 7월 단월(27.7%) 일시적 조정에 따른 채널 점검이 요구됩니다.",
+        "하이센스가 16.2%로 침투 중이므로 메인스트림 라인업의 방어선 구축이 병행되어야 합니다."
+      ]
+    },
+    {
+      "code": "LGERO",
+      "short_code": "RO",
+      "name": "루마니아 지점 (LGERO)",
+      "status_type": "opportunity",
+      "status_label": "7월 단월 반등 (+1.0%p)",
+      "pills": [
+        "7월 M/S: 19.2%",
+        "누계 M/S: 18.4% (+0.1%p)",
+        "삼성 격차: -20.4%p",
+        "OLED M/S: 43.6%",
+        "하이센스 M/S: 9.6%"
+      ],
+      "bullets": [
+        "7월 단월 19.2%로 전월 누적(18.2%) 대비 +1.0%p 급반등하며 누적 점유율 18.4%로 턴어라운드를 시작했습니다.",
+        "하이센스 점유율을 9.6%로 억제하며 로컬 가전 전문 유통 채널과의 독점 번들 프로모션을 확대 중입니다.",
+        "OLED 시장 43.6%로 동유럽 프리미엄 수요를 성공적으로 견인하고 있습니다."
+      ]
+    },
+    {
+      "code": "LGEAG",
+      "short_code": "AG",
+      "name": "오스트리아 지점 (LGEAG)",
+      "status_type": "neutral",
+      "status_label": "전년비 성장(+1.7%p) 지속",
+      "pills": [
+        "7월 M/S: 24.5%",
+        "누계 M/S: 25.6% (-0.2%p)",
+        "삼성 격차: -15.4%p",
+        "OLED M/S: 52.2%",
+        "하이센스 M/S: 7.5%"
+      ],
+      "bullets": [
+        "누적 M/S 25.6%로 전년 동기 대비 +1.7%p 상승세를 유지하며 서유럽 거점 중 높은 점유율 수준을 유지하고 있습니다.",
+        "7월 단월 실적(24.5%)의 일시적 숨고르기 이후 하반기 하이엔드 라인업 재정비가 예정되어 있습니다.",
+        "OLED M/S 52.2%로 과반을 점유하며 프리미엄 고객층의 높은 브랜드 충성도를 확인했습니다."
+      ]
+    },
+    {
+      "code": "LGEHS",
+      "short_code": "HS",
+      "name": "그리스 법인 (LGEHS)",
+      "status_type": "neutral",
+      "status_label": "점유율 소폭 상승 & OLED 49%",
+      "pills": [
+        "7월 M/S: 24.5%",
+        "누계 M/S: 24.1% (+0.1%p)",
+        "삼성 격차: -13.7%p",
+        "OLED M/S: 49.3%",
+        "하이센스 M/S: 10.7%"
+      ],
+      "bullets": [
+        "7월 단월 24.5%로 누적 점유율을 24.1%로 끌어올렸으며, 삼성비 격차도 -13.7%p로 소폭 축소되었습니다.",
+        "OLED 시장 49.3%를 장악하며 그리스 프리미엄 수요를 흡수하고 있습니다.",
+        "하이센스(10.7%)에 대응한 엔트리 UHD 라인업의 재고 건전성을 집중 점검하고 있습니다."
+      ]
+    },
+    {
+      "code": "Swiss",
+      "short_code": "CH",
+      "name": "스위스 지점 (Swiss)",
+      "status_type": "opportunity",
+      "status_label": "7월 단월 반등(+0.3%p) & OLED 40.8%",
+      "pills": [
+        "7월 M/S: 24.3%",
+        "누계 M/S: 22.4% (+0.3%p)",
+        "삼성 격차: -24.4%p",
+        "OLED M/S: 36.7%",
+        "하이센스 M/S: 8.4%"
+      ],
+      "bullets": [
+        "7월 단월 M/S 24.3%로 호조를 보이며 6월 누적(22.2%) 대비 누적 점유율을 22.5%로 +0.3%p 견인했습니다.",
+        "삼성전자와의 격차를 6월 누적 -25.1%p에서 -24.3%p로 +0.8%p 축소하며 반등 모멘텀을 확보했습니다.",
+        "7월 단월 OLED M/S 40.8% 달성 및 평균 ASP $1,188로 시장($1,100) 대비 확고한 프리미엄 포지션을 유지하고 있습니다."
+      ]
+    }
+  ]
+}
